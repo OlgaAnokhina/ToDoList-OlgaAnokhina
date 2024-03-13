@@ -1,16 +1,19 @@
-import { useState } from 'react'
+/*import { useState } from 'react'*/
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
 import TodoList from './TodoList';
 import AddTodoForm from './AddTodoForm';
+import React, { useState } from 'react'; 
 
 function App() {
+  const [newTodo, setNewTodo] = useState('');
   return (
       <div className="App">
-          <h1>'TODO LIST'</h1>
-          <AddTodoForm />
-          <TodoList /> {}
+          <h1>TODO LIST</h1>
+          <AddTodoForm onAddTodo={setNewTodo}/>
+          <p>{newTodo}</p>
+          <TodoList /> 
       </div>
   );
 }
