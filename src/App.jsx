@@ -6,18 +6,50 @@ import TodoList from './TodoList';
 import AddTodoForm from './AddTodoForm';
 import React, { useState } from 'react'; 
 
-function App() {
-  const [newTodo, setNewTodo] = useState('');
+
+/*function App() {
+  const [todoList, setTodoList] = useState([]);
+
   return (
+    <div>
+      {/* другой JSX код }
+      <TodoList todoList={todoList} />
+    </div>
+  );
+}*/
+
+
+
+
+function App() {
+  //const [newTodo, setNewTodo] = useState('');
+  const [todoList, setTodoList] = useState([]);
+  const addTodo = (newTodo) => {
+    setTodoList((prevTodoList) => [...prevTodoList, { ...newTodo, id: Date.now() }]);
+  };
+  return (
+    
       <div className="App">
           <h1>TODO LIST</h1>
-          <AddTodoForm onAddTodo={setNewTodo}/>
-          <p>{newTodo}</p>
-          <TodoList /> 
+          <AddTodoForm onAddTodo={addTodo}/>
+      
+         
+          
+          <TodoList todoList={todoList} />
       </div>
   );
 }
+/*
+function App() {
+  const [todoList, setTodoList] = useState([]);
 
+  return (
+    <div>
+      {/* другой JSX код *//*}
+      /*<TodoList todoList={todoList} />
+    </div>
+  );
+} */
 /*const todoList = [
   { id: 1, title: 'chek the work' },
   { id: 2, title: 'cook a dinner' },
