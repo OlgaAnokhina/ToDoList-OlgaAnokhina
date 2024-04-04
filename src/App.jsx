@@ -4,8 +4,8 @@ import viteLogo from '/vite.svg'
 import './App.css'
 import TodoList from './TodoList';
 import AddTodoForm from './AddTodoForm';
-import React, { useState } from 'react'; 
-
+//import React, { useState } from 'react'; 
+import React, { useState, useEffect } from 'react'; // Добавляем импорт useEffect
 
 /*function App() {
   const [todoList, setTodoList] = useState([]);
@@ -17,13 +17,51 @@ import React, { useState } from 'react';
     </div>
   );
 }*/
-
-
-
-
 function App() {
+  const [todoList, setTodoList] = useSemiPersistentState();
+
+  const addTodo = (newTodo) => {
+    setTodoList(prevTodoList => [...prevTodoList, newTodo]);
+  };
+
+function useSemiPersistentState() {
+  const [todoList, setTodoList] = useState(() => {
+    const saved = localStorage.getItem('savedTodoList');
+    return saved ? JSON.parse(saved) : [];
+  });
+
+  useEffect(() => {
+    localStorage.setItem('savedTodoList', JSON.stringify(todoList));
+  }, [todoList]);
+
+  return [todoList, setTodoList];
+}
+
+
+  return (
+    <div className="App">
+      <h1>TODO LIST</h1>
+      <AddTodoForm onAddTodo={addTodo}/>
+      <TodoList todoList={todoList} />
+    </div>
+  );
+}
+/*function App() {
+  const [todoList, setTodoList] = useState(() => {
+    const saved = localStorage.getItem('savedTodoList');
+    if (saved) {
+      return JSON.parse(saved);
+    }
+    return [];
+  });
   //const [newTodo, setNewTodo] = useState('');
-  const [todoList, setTodoList] = useState([]);
+  //const [todoList, setTodoList] = useState([]);
+
+ // Определение useEffect для сохранения todoList в localStorage
+ useEffect(() => {
+  localStorage.setItem('savedTodoList', JSON.stringify(todoList));
+}, [todoList]);
+  
   const addTodo = (newTodo) => {
     setTodoList((prevTodoList) => [...prevTodoList, { ...newTodo, id: Date.now() }]);
   };

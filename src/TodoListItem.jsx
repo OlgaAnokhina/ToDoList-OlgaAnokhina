@@ -1,9 +1,10 @@
 import React from 'react';
 //<TodoListItem key={todo.id} todo={todo} />
 
-function TodoListItem({todo}) {
+function TodoListItem({todo, index}) {
     //const { todo } = props;
-    return <li>{todo.title}</li>;
+    return <li> {todo.title} Item {index}</li>;
+    // return <li>{todo.title}</li>;
        /* <div>
               <h1>Todo List</h1>
               <ul>
