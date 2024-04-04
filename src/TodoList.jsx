@@ -13,12 +13,11 @@ function TodoList({todoList}) {
     return (
       <div>
         
-        <ul> 
-          
-        {todoList.map(todo => (
-         <TodoListItem key={todo.id} todo={todo} />
-    ))}
-         </ul>
+        <ul>
+            {todoList.map((todo, index) => (
+              <TodoListItem key={todo.id} todo={todo} index={index + 1} />
+                ))}
+        </ul>
       </div>
           )
     
