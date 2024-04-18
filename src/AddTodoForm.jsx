@@ -1,5 +1,5 @@
 import  { useState } from 'react';
-
+import InputWithLabel from './InputWithLabel';
 function AddTodoForm({onAddTodo}) {
     // Добавляем переменную состояния для значения ввода
     const [todoTitle, setTodoTitle] = useState('');
@@ -20,14 +20,13 @@ function AddTodoForm({onAddTodo}) {
 
     return (
         <form onSubmit={handleAddTodo}>
-            <label htmlFor="todoTitle">Title</label>
-            <input
-                type="text"
-                name="title"
-                id="todoTitle"
-                value={todoTitle} // Используем локальное состояние для значения
-                onChange={handleTitleChange} // Используем локальный обработчик для обновления значения
-            />
+           <InputWithLabel
+           
+           value={todoTitle}
+           onChange={handleTitleChange}
+           >
+            Title:
+            </InputWithLabel>
             <button type="submit">Add</button>
             <hr />
         </form>
