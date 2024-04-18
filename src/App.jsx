@@ -1,10 +1,9 @@
-/*import { useState } from 'react'*/
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
-import TodoList from './TodoList';
+import React, { useState } from 'react';
+import './App.css';
 import AddTodoForm from './AddTodoForm';
-import React, { useState } from 'react'; 
+import TodoList from './TodoList';
+import reactLogo from './assets/react.svg';
+import viteLogo from '/vite.svg';
 
 
 /*function App() {
@@ -24,9 +23,17 @@ import React, { useState } from 'react';
 function App() {
   //const [newTodo, setNewTodo] = useState('');
   const [todoList, setTodoList] = useState([]);
+  
+  
   const addTodo = (newTodo) => {
     setTodoList((prevTodoList) => [...prevTodoList, { ...newTodo, id: Date.now() }]);
   };
+  // Добавляем функцию для удаления задачи
+  const removeTodo = (id) => {
+    const updatedTodoList = todoList.filter(todo => todo.id !== id);
+    setTodoList(updatedTodoList);
+  };
+
   return (
     
       <div className="App">
@@ -35,7 +42,7 @@ function App() {
       
          
           
-          <TodoList todoList={todoList} />
+          <TodoList todoList={todoList} onRemoveTodo={removeTodo} />
       </div>
   );
 }
